@@ -23,6 +23,8 @@ public class Main {
 
     public static final String CRAWL_CHARSET = "charset";
     public static final String CRAWL = "crawl";
+    public static final String MONGO = "mongo";
+    public static final String FILE = "file";
 
     @SuppressWarnings("static-access")
     private static Option getCrawlOption() {
@@ -34,17 +36,29 @@ public class Main {
         return OptionBuilder.withLongOpt(CRAWL_CHARSET).hasArg().withDescription("crawl charset").create(CRAWL_CHARSET);
     }
 
+    @SuppressWarnings("static-access")
+    private static Option getMongoOption() {
+        return OptionBuilder.withLongOpt(MONGO).hasArg().withDescription("mongo db").create(MONGO);
+    }
+
+    @SuppressWarnings("static-access")
+    private static Option getFileOption() {
+        return OptionBuilder.withLongOpt(FILE).hasArg().withDescription("file").create(FILE);
+    }
+
     private static Options getAllOptions() {
         Options options = new Options();
         options.addOption(getCrawlOption());
         options.addOption(getCharsetOption());
+        options.addOption(getMongoOption());
+        options.addOption(getFileOption());
         return options;
     }
 
     private static void printUsage() {
         System.out.println("Usage:");
         System.out.println("Help: java -jar cross-util-with-dependencies.jar -h");
-        System.out.println("Crawl url: java -jar cross-util-with-dependencies.jar -crawl");
+        System.out.println("Crawl url: java -jar cross-util-with-dependencies.jar -crawl url -charset charset");
     }
 
     private static void crawlUrl(CommandLine cmd)
@@ -55,6 +69,11 @@ public class Main {
         {
             charset = cmd.getOptionValue(CRAWL_CHARSET);
         }
+        crawlUrl(cmd.getOptionValue(CRAWL), charset);
+    }
+
+    private static void crawlUrl(String url, String charset)
+    {
         try {
             SimpleWebCrawler crawler = new SimpleWebCrawler();
             Link link = new Link();
@@ -78,7 +97,7 @@ public class Main {
     
     public static void main(String[] args)
     {
-                Options options = getAllOptions();
+        Options options = getAllOptions();
         CommandLineParser parser = new GnuParser();
         CommandLine cmd = null;
         try {
