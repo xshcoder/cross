@@ -85,6 +85,7 @@ public class MongoUtil {
         }
         doc.put("url", url);
         doc.put("mimetype", page.getMimetype());
+        doc.put("charset", page.getCharset());
         doc.put("content", page.getBytes());
         if (getDocument(url, collection) != null) {
             WriteResult result = collection.update(new BasicDBObject().append("url", page.getLink().toString()), doc);
@@ -125,6 +126,7 @@ public class MongoUtil {
                 System.out.println("crawl url: " + link.toString());
                 WebPage page = crawler.crawl(link);
                 page.setMimetype(MimeMapper.HTML);
+                page.setCharset(charset);
                 MongoUtil.saveDocument(page, collection);
                 DBObject doc = MongoUtil.getDocument(url, collection);
                 if (doc != null) {

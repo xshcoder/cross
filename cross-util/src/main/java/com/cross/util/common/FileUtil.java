@@ -54,7 +54,7 @@ public class FileUtil {
         out.close();
     }
 
-    public static void saveBinaryFile(File file, byte[] bytes, String charset) throws IOException {
+    public static void saveBinaryFile(File file, byte[] bytes) throws IOException {
         OutputStream output = new BufferedOutputStream(new FileOutputStream(file));
         output.write(bytes);
         output.close();
@@ -71,5 +71,31 @@ public class FileUtil {
             file.createNewFile();
         }
         return file;
+    }
+    
+    public static File getFile(String filepath) throws IOException
+    {
+        File file = new File(filepath);
+        if (!file.exists())
+        {
+            return null;
+        }
+        return file;
+    }
+    
+    public static String getExtension(String filename)
+    {
+        if (filename!=null)
+        {
+            int i = filename.lastIndexOf(".");
+            if (i>0)
+            {
+                return filename.substring(i);
+            } else
+            {
+                return "";
+            }
+        }
+        return null;
     }
 }

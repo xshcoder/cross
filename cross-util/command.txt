@@ -1,0 +1,2 @@
+java -jar target\cross-util-jar-with-dependencies.jar -crawl -url http://www.jshongda.com/ -charset gb2312 -file "c:\Documents and Settings\Ejer\Dokumenter\NetBeansProjects\cross\cross-util\jshongda.html"
+java -jar target\cross-util-jar-with-dependencies.jar -mongo -url http://www.jshongda.com/ -charset gb2312 -file "c:\Documents and Settings\Ejer\Dokumenter\NetBeansProjects\cross\cross-util\jshongda.html" -host 127.0.0.1 -port 27017 -db test -collection testcollection

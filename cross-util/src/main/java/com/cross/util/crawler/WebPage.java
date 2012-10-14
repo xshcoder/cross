@@ -9,17 +9,19 @@ import org.apache.log4j.Logger;
 public class WebPage {
     private Link link = null;
     private String mimetype = null;
+    private String charset = null;
     private byte[] bytes = null;
 
     public WebPage()
     {
     }
 
-    public WebPage(Link link, byte[] bytes, String mimetype)
+    public WebPage(Link link, byte[] bytes, String mimetype, String charset)
     {
         this.link = link;
         this.bytes = bytes;
         this.mimetype = mimetype;
+        this.charset = charset;
     }
 
     public byte[] getBytes() {
@@ -44,5 +46,13 @@ public class WebPage {
 
     public void setMimetype(String mimetype) {
         this.mimetype = mimetype;
+    }
+
+    public String getCharset() {
+        return charset;
+    }
+
+    public void setCharset(String charset) {
+        this.charset = charset;
     }
 }
